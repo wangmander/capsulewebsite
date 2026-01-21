@@ -1,70 +1,61 @@
-export default function Examples() {
-    const examples = [
-        {
-            url: "bikeshop.capsuleweb.site",
-            bg: "bg-blue-500",
-            content: "Mike's Bikes",
-            sub: "Custom frame building",
-        },
-        {
-            url: "trainer.capsuleweb.site",
-            bg: "bg-green-500",
-            content: "Fit with Emma",
-            sub: "Personal Training",
-        },
-        {
-            url: "cafe.capsuleweb.site",
-            bg: "bg-pink-500",
-            content: "Java & Code",
-            sub: "Tech coworking café",
-        },
-        {
-            url: "marketplace.capsuleweb.site",
-            bg: "bg-orange-500",
-            content: "Handmade Gems",
-            sub: "Artisan Marketplace",
-        },
-    ];
+const examples = [
+  {
+    name: "SFMiniMozarts",
+    url: "sfminimozarts.capsuleweb.site",
+    description: "Local music studio",
+    image: "/images/sfminimozarts.png",
+  },
+  {
+    name: "Example 2",
+    url: "example2.capsuleweb.site",
+    description: "Coming soon",
+    image: null,
+  },
+  {
+    name: "Example 3",
+    url: "example3.capsuleweb.site",
+    description: "Coming soon",
+    image: null,
+  },
+]
 
-    return (
-        <section className="py-24 bg-white overflow-hidden">
-            <div className="max-w-6xl mx-auto px-6">
-                <h2 className="text-4xl font-display font-bold text-center mb-16 text-primary">Examples</h2>
+export function Examples() {
+  return (
+    <section className="py-24 px-6 lg:px-16 bg-slate-50">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-4xl lg:text-5xl font-bold text-center text-foreground mb-12">Examples</h2>
 
-                {/* Simple horizontal scroll or grid. Let's do a grid that looks like cards. */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                    {examples.map((ex, i) => (
-                        <div key={i} className="group relative aspect-[3/4] rounded-2xl bg-gray-50 border border-gray-100 p-2 shadow-sm hover:shadow-xl transition-all hover:-translate-y-2 cursor-default">
-                            {/* Browser chrome */}
-                            <div className="w-full h-8 bg-white rounded-t-xl border-b border-gray-100 flex items-center px-2 gap-1 mb-2">
-                                <div className="w-2 h-2 rounded-full bg-red-400" />
-                                <div className="w-2 h-2 rounded-full bg-yellow-400" />
-                                <div className="w-2 h-2 rounded-full bg-green-400" />
-                            </div>
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6">
+          {examples.map((example) => (
+            <div
+              key={example.url}
+              className="group rounded-2xl bg-background border border-slate-200 shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+            >
+              {/* Thumbnail preview */}
+              <div className="h-48 bg-slate-100 relative overflow-hidden">
+                {example.image ? (
+                  <img 
+                    src={example.image || "/placeholder.svg"} 
+                    alt={example.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center">
+                    <span className="text-slate-400 text-sm">Coming soon</span>
+                  </div>
+                )}
+              </div>
 
-                            {/* Content preview */}
-                            <div className={`w-full h-[calc(100%-2.5rem)] rounded-xl ${ex.bg} bg-opacity-10 p-4 flex flex-col justify-end overflow-hidden relative`}>
-                                <div className={`absolute inset-0 ${ex.bg} opacity-20`} />
-
-                                {/* Mock content lines */}
-                                <div className="w-12 h-12 rounded-lg bg-white/50 mb-4 backdrop-blur-sm" />
-
-                                <div className="space-y-2 relative z-10">
-                                    <div className="h-4 w-3/4 bg-white/80 rounded" />
-                                    <div className="h-3 w-1/2 bg-white/60 rounded" />
-                                </div>
-
-                                {/* Mock Text overlay */}
-                                <div className="absolute top-4 left-4 right-4">
-                                    <h4 className="text-sm font-bold text-gray-900">{ex.content}</h4>
-                                    <p className="text-xs text-gray-600">{ex.sub}</p>
-                                    <p className="text-[10px] text-blue-500 mt-1">{ex.url}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+              {/* Info */}
+              <div className="p-4">
+                <h3 className="font-semibold text-foreground">{example.name}</h3>
+                <p className="text-sm text-muted-foreground mb-2">{example.description}</p>
+                <p className="text-xs font-mono text-blue-600">{example.url}</p>
+              </div>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }

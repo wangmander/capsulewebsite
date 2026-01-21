@@ -1,32 +1,39 @@
-export default function Pricing() {
-    return (
-        <section className="py-24 bg-gray-50/50">
-            <div className="max-w-3xl mx-auto px-6 text-center">
-                <h2 className="text-4xl font-display font-bold mb-12 text-primary">Pricing</h2>
+"use client"
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow text-left">
-                        <div className="text-5xl font-extrabold font-display mb-4 text-primary">$1</div>
-                        <h3 className="text-lg font-bold mb-2 text-primary">Generate a website</h3>
-                        <p className="text-sm text-secondary">Prompts → Complete website</p>
-                    </div>
+export function Pricing() {
+  const scrollToForm = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
 
-                    <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow text-left">
-                        <div className="text-5xl font-extrabold font-display mb-4 text-primary">$1</div>
-                        <h3 className="text-lg font-bold mb-2 text-primary">Make an edit</h3>
-                        <p className="text-sm text-secondary">Prompt-based changes & updates</p>
-                    </div>
-                </div>
+  return (
+    <section className="py-24 px-6 lg:px-16 bg-white">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-4xl lg:text-5xl font-bold text-center text-foreground mb-12">Pricing</h2>
 
-                <p className="mt-8 text-sm text-secondary font-medium">
-                    No subscriptions, hidden fees, or recurring costs.
-                </p>
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Generate card */}
+          <button
+            onClick={scrollToForm}
+            className="p-8 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 border-2 border-slate-200 shadow-lg hover:scale-105 transition-transform cursor-pointer text-left"
+          >
+            <div className="text-5xl font-extrabold text-foreground mb-2">$1</div>
+            <div className="text-xl font-semibold text-foreground mb-4">Generate a website</div>
+            <p className="text-muted-foreground">Describe it, pay, get a live link.</p>
+          </button>
 
-                {/* Floating cheeky note */}
-                <div className="mt-8 inline-block bg-white border border-gray-200 rounded-full px-4 py-2 text-xs font-medium text-gray-500 shadow-sm rotate-1">
-                    Beats paying $20/mo just to keep a site alive.
-                </div>
-            </div>
-        </section>
-    );
+          {/* Edit card */}
+          <button
+            onClick={scrollToForm}
+            className="p-8 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 border-2 border-slate-200 shadow-lg hover:scale-105 transition-transform cursor-pointer text-left"
+          >
+            <div className="text-5xl font-extrabold text-foreground mb-2">$1</div>
+            <div className="text-xl font-semibold text-foreground mb-4">Make an edit</div>
+            <p className="text-muted-foreground">Describe the change, get an updated link.</p>
+          </button>
+        </div>
+
+        <p className="mt-8 text-center text-muted-foreground">No subscriptions. Pay when you need a new capsule.</p>
+      </div>
+    </section>
+  )
 }
