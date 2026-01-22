@@ -1,21 +1,43 @@
-import Hero from "@/components/Hero";
-import HowItWorks from "@/components/HowItWorks";
-import Features from "@/components/Features";
-import Pricing from "@/components/Pricing";
-import Examples from "@/components/Examples";
-import Share from "@/components/Share";
-import Footer from "@/components/Footer";
+"use client"
+
+import { useState } from "react"
+import { HeroSection } from "@/components/hero-section"
+import { HowItWorks } from "@/components/how-it-works"
+import { Pricing } from "@/components/pricing"
+import { Examples } from "@/components/examples"
+import { ViralShare } from "@/components/viral-share"
+import { Footer } from "@/components/footer"
+
+export interface FormData {
+  description: string
+  name: string
+  email: string
+  vibe: string | null
+  color: string | null
+}
 
 export default function Home() {
+  const [formData, setFormData] = useState<FormData>({
+    description: "",
+    name: "",
+    email: "",
+    vibe: null,
+    color: null,
+  })
+
+  const handleSubmit = () => {
+    // This will be handled by the HeroSection component's share modal
+    console.log("Form submitted:", formData)
+  }
+
   return (
     <main className="min-h-screen bg-background font-sans overflow-x-hidden">
-      <Hero />
+      <HeroSection formData={formData} setFormData={setFormData} onSubmit={handleSubmit} />
       <HowItWorks />
-      <Features />
       <Pricing />
       <Examples />
-      <Share />
+      <ViralShare />
       <Footer />
     </main>
-  );
+  )
 }
