@@ -458,7 +458,17 @@ export function CapsuleWindow() {
   const cols = 12
   const rows = 7
 
-  const capsules = []
+  type CapsuleData = {
+    id: number
+    color: string
+    x: number
+    y: number
+    rotation: number
+    wireframeType: number
+    orientation: "up" | "down" | "left" | "right"
+  }
+
+  const capsules: CapsuleData[] = []
   let id = 0
 
   for (let row = 0; row < rows; row++) {
