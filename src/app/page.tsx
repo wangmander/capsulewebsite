@@ -1,12 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { HeroSection } from "@/components/hero-section"
-import { HowItWorks } from "@/components/how-it-works"
-import { Pricing } from "@/components/pricing"
-import { Examples } from "@/components/examples"
-import { ViralShare } from "@/components/viral-share"
-import { Footer } from "@/components/footer"
+import HeroSection from "@/components/hero-section"
+import HowItWorks from "@/components/how-it-works"
+import Pricing from "@/components/pricing"
+import Examples from "@/components/Examples"
+import ViralShare from "@/components/viral-share"
+import Footer from "@/components/footer"
 
 export interface FormData {
   description: string
@@ -25,14 +25,9 @@ export default function Home() {
     color: null,
   })
 
-  const handleSubmit = () => {
-    // This will be handled by the HeroSection component's share modal
-    console.log("Form submitted:", formData)
-  }
-
   return (
-    <main className="min-h-screen bg-background font-sans overflow-x-hidden">
-      <HeroSection formData={formData} setFormData={setFormData} onSubmit={handleSubmit} />
+    <main className="min-h-screen bg-background overflow-x-hidden">
+      <HeroSection formData={formData} setFormData={setFormData} />
       <HowItWorks />
       <Pricing />
       <Examples />
