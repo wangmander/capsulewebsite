@@ -1,4 +1,4 @@
-// FILE: src/components/hero-section.tsx
+// src/components/hero-section.tsx
 "use client"
 
 import { useState, useEffect } from "react"
@@ -93,18 +93,19 @@ export default function HeroSection({ formData, setFormData }: HeroSectionProps)
       return
     }
 
-    setLoading(true)
     setError(null)
+    setLoading(true)
 
     try {
-      const res = await fetch("/api/intake", {
+      const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
 
       const json = await res.json()
-      if (!res.ok) throw new Error(json?.error || "Failed to start checkout")
+      if (!res.ok) throw new Error(json?.error || "Checkout failed")
+      if (!json?.checkoutUrl) throw new Error("Missing checkoutUrl")
 
       window.location.href = json.checkoutUrl
     } catch (e: any) {
@@ -141,7 +142,7 @@ export default function HeroSection({ formData, setFormData }: HeroSectionProps)
 
           <div className="mt-6">
             <div className="flex items-baseline gap-2 mb-3">
-              <label className="text-lg font-bold text-foreground">What&apos;s the site about?</label>
+              <label className="text-lg font-bold text-foreground">What's the site about?</label>
               <h2 className="text-sm text-muted-foreground">Select a category and fill it out</h2>
             </div>
 
@@ -263,14 +264,16 @@ export default function HeroSection({ formData, setFormData }: HeroSectionProps)
               disabled={loading}
               className={cn(
                 "w-full px-6 py-4 rounded-full text-lg font-bold transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]",
-                loading ? "bg-neutral-900 text-[#f5c842] opacity-80" : "bg-black text-[#f5c842] hover:bg-neutral-900"
+                loading
+                  ? "bg-neutral-900 text-[#f5c842] opacity-80 cursor-not-allowed"
+                  : "bg-black text-[#f5c842] hover:bg-neutral-900"
               )}
               type="button"
             >
               {loading ? "Redirecting…" : "Continue → Insert $1"}
             </button>
             <p className="mt-3 text-sm text-muted-foreground text-center">
-              After payment you’ll get a share card + your link.
+              You'll get a shareable link instantly.
             </p>
           </div>
         </div>
